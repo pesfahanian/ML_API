@@ -10,5 +10,5 @@ class CaseList(BaseModel):
 
 class CaseEntry(BaseModel):
     patient:    str = Field(..., example = "Patient Name")
-    url:        str = Field(..., example = "https://facebook.com/stipid_image.jpg")
+    url:        str = Field(..., example = "https://facebook.com/stupid_image.jpg")
     modality:   str = Field(..., example = "DX_Chest")
