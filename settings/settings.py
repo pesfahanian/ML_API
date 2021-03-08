@@ -26,8 +26,6 @@ ACCEPTABLE_FILE_FORMATS = os.environ.get('ACCEPTABLE_FILE_FORMATS', ['image/jpeg
 # Security variables
 SALT_LENGTH = os.environ.get('SALT_LENGTH', 16)
 if DEVELOP_MODE:
-    # ADMIN_HASH_USERNAME = os.environ.get('ADMIN_HASH_USERNAME', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918')
-    # ADMIN_HASH_PASSWORD = os.environ.get('ADMIN_HASH_PASSWORD', 'ca9911c2e5a3c2a32613689380063c985d7d7084ba63f6d15de5b5dd21d31f65')
     ADMIN_HASH_USERNAME = config_object['Security']['ADMIN_HASH_USERNAME']
     ADMIN_HASH_PASSWORD = config_object['Security']['ADMIN_HASH_PASSWORD']
 else:
@@ -38,7 +36,6 @@ else:
 # Databases variables
 POSTGRES_DATABASE_USER = os.environ.get('POSTGRES_USER', 'postgres')
 if DEVELOP_MODE:
-    # POSTGRES_DATABASE_PASSWORD = os.environ.get('POSTGRES_PASSWORD', 1234)
     POSTGRES_DATABASE_PASSWORD = config_object['Database']['POSTGRES_DATABASE_PASSWORD']
 else:
     POSTGRES_DATABASE_PASSWORD = os.environ.get('POSTGRES_PASSWORD', None)
