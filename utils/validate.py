@@ -6,7 +6,9 @@ from fastapi import HTTPException
 
 from settings import ACCEPTABLE_FILE_SUFFIXES, ACCEPTABLE_FILE_FORMATS
 
+
 logger = logging.getLogger(__name__)
+
 
 def validate_file_suffix(_file):
     """
@@ -20,6 +22,7 @@ def validate_file_suffix(_file):
         raise HTTPException(status_code=400, detail=f"Image file {_file.filename} suffix {suffix} is unacceptable.")
     logger.info(f'Image file {_file.filename} suffix validated!')
     return True
+
 
 def validate_file_format(_file):
     """
@@ -36,6 +39,7 @@ def validate_file_format(_file):
         raise HTTPException(status_code=400, detail=f"Image file {_file.filename} format {fileformat} is unacceptable.")
     logger.info(f'Image file {_file.filename} format validated!')
     return True
+
 
 def validate_uploaded_file(_file):
     logger.info(f'Validating image file {_file.filename}...')

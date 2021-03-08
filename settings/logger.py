@@ -4,6 +4,7 @@ import logging
 from logging import Formatter
 from logging.handlers import BufferingHandler
 
+
 logger = logging.getLogger(__name__)
 LOGFORMAT = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
 

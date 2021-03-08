@@ -8,13 +8,14 @@ from authentication.decorator import authentication
 
 from database.inferencesdb import inferences_database, inferences
 
+
 logger = logging.getLogger(__name__)
+
 
 router = APIRouter(prefix       =   RECORDS_ENDPOINT,
                    tags         =   ["Records"],
                    responses    =   {404: {"description": "Not found"}})
 
-"""-------------------------------------------------------------------------"""
 
 @router.get("/query/", status_code=200)
 @authentication.admin_required
@@ -25,6 +26,7 @@ async def query_all_inferences():
     query = inferences.select()
     logger.info('Querying all inference records.')
     return await inferences_database.fetch_all(query)
+
 
 @router.post("/query/id/", status_code=200)
 @authentication.admin_required
@@ -43,6 +45,7 @@ async def query_inference(ID: str):
         logger.warning(f'Inference record with ID {ID} does not exist.')
         raise HTTPException(status_code=404, detail=f"Inference record with ID {ID} does not exist.")
 
+
 @router.post("/query/user/", status_code=200)
 @authentication.admin_required
 async def query_user_inferences(user: str):
@@ -59,6 +62,7 @@ async def query_user_inferences(user: str):
     else:
         logger.warning(f'User {user} does not exist.')
         raise HTTPException(status_code=404, detail=f"User {user} does not exist.")
+
 
 @router.delete("/delete/", status_code=200)
 @authentication.admin_required

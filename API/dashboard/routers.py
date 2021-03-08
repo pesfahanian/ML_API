@@ -12,13 +12,14 @@ from database.usersdb import users_database, users
 from utils.security import make_hash
 from utils.misc import user_credentials
 
+
 logger = logging.getLogger(__name__)
+
 
 router = APIRouter(prefix       =   DASHBOARD_ENDPOINT,
                    tags         =   ["Dashboard"],
                    responses    =   {404: {"description": "Not found"}})
 
-"""-------------------------------------------------------------------------"""
 
 @router.get("/query/", status_code=200)
 @authentication.admin_required
@@ -29,6 +30,7 @@ async def query_all_users():
     logger.info('Querying all user records.')
     query = users.select()
     return await users_database.fetch_all(query)
+
 
 @router.post("/query/", status_code=200)
 @authentication.admin_required
@@ -47,6 +49,7 @@ async def query_user(username: str):
     else:
         logger.warning(f'User {username} does not exist.')
         raise HTTPException(status_code=404, detail=f"User {username} does not exist.")
+
 
 @router.post("/register/", status_code=200)
 @authentication.admin_required
@@ -87,6 +90,7 @@ async def register_user(username: str, password: str, passwordConfirm: str):
     else:
         raise HTTPException(status_code=400, detail="Password confirmation doesn't match.")
 
+
 @router.patch("/change/", status_code=200)
 @authentication.admin_required
 async def change_password(username: str, password: str, passwordConfirm: str):
@@ -119,6 +123,7 @@ async def change_password(username: str, password: str, passwordConfirm: str):
         logger.warning('Password confirmation does not match.')
         raise HTTPException(status_code=400, detail="Password confirmation does not match.")
 
+
 @router.patch("/activate/", status_code=200)
 @authentication.admin_required
 async def activate_user(username: str):
@@ -142,6 +147,7 @@ async def activate_user(username: str):
         logger.warning(f'User {username} does not exist.')
         raise HTTPException(status_code=404, detail=f"User {username} does not exist.")
 
+
 @router.patch("/deactivate/", status_code=200)
 @authentication.admin_required
 async def deactivate_user(username: str):
@@ -164,6 +170,7 @@ async def deactivate_user(username: str):
     else:
         logger.warning(f'User {username} does not exist.')
         raise HTTPException(status_code=404, detail=f"User {username} does not exist.")
+
 
 @router.delete("/delete/", status_code=200)
 @authentication.admin_required

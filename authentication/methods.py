@@ -12,7 +12,9 @@ from settings import ADMIN_HASH_USERNAME, ADMIN_HASH_PASSWORD
 
 from utils.security import verify_hash
 
+
 logger = logging.getLogger(__name__)
+
 
 def authenticate_admin(request: Request, credentials: HTTPBasicCredentials = Depends(HTTPBasic())):
     """
@@ -33,6 +35,7 @@ def authenticate_admin(request: Request, credentials: HTTPBasicCredentials = Dep
             headers     =   {"WWW-Authenticate": "Basic"},
         )
     return _username
+
 
 async def authenticate_user(request: Request, credentials: HTTPBasicCredentials = Depends(HTTPBasic())):
     """

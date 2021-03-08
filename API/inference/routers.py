@@ -16,13 +16,14 @@ from utils.validate import validate_uploaded_file
 from worker.tasks import run
 from worker.results import get_result
 
+
 logger = logging.getLogger(__name__)
+
 
 router = APIRouter(prefix       =   INFERENCE_ENDPOINT,
                    tags         =   ["Inference"],
                    responses    =   {404: {"description": "Not found"}})
 
-"""-------------------------------------------------------------------------"""
 
 @router.post("/upload/", status_code=200)
 @authentication.user_required

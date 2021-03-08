@@ -5,11 +5,11 @@ from authentication.decorator import authentication
 
 from .urls import BASE_ENDPOINT
 
+
 router = APIRouter(prefix       =   BASE_ENDPOINT,
                    tags         =   ["Base"],
                    responses    =   {404: {"description": "Not found"}})
 
-"""-------------------------------------------------------------------------"""
 
 @router.get("/root/", status_code=200)
 @authentication.admin_required
@@ -18,6 +18,7 @@ async def root():
     Root path for the API.
     """
     return "Welcome to the ImageNet prediction API."
+
 
 @router.get("/docs/", status_code=200)
 @authentication.admin_required

@@ -14,17 +14,18 @@ from database.inferencesdb import inferences_database
 from settings import PATH, VERSION
 from settings.logger import setup_logging_pre
 
+
 logger = logging.getLogger('API')
 setup_logging_pre()
 
+
 app = FastAPI(title         =   "ML-API",
               description   =   "API Documentation and endpoint access for running inference using DenseNet.",
-              version       =   str(VERSION) + ".0.0",
+              version       =   str(VERSION),
               docs_url      =   None,
               redoc_url     =   None,
               debug         =   False)
 
-"""-------------------------------------------------------------------------"""
 
 @app.on_event("startup")
 async def startup():
@@ -36,6 +37,7 @@ async def startup():
     await inferences_database.connect()
     logger.info('Connected to inferences database.')
 
+
 @app.on_event("shutdown")
 async def shutdown():
     """
@@ -46,6 +48,7 @@ async def shutdown():
     await inferences_database.disconnect()
     logger.info('Disconnected from inferences database.')
 
+
 @app.get("/", status_code=307)
 async def root_redirect():
     """
@@ -53,6 +56,7 @@ async def root_redirect():
     """
     response = RedirectResponse(url=PATH+"/root/")
     return response
+
 
 @app.get("/docs", status_code=307)
 async def docs_redirect():
@@ -62,7 +66,6 @@ async def docs_redirect():
     response = RedirectResponse(url=PATH+"/docs/")
     return response
 
-"""-------------------------------------------------------------------------"""
 
 app.include_router(base_routers.router)
 app.include_router(records_routers.router)

@@ -5,7 +5,9 @@ from fastapi import Depends
 
 from .methods import authenticate_admin, authenticate_user
 
+
 logger = logging.getLogger(__name__)
+
 
 class authentication:
     """

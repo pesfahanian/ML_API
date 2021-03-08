@@ -4,6 +4,7 @@ from datetime import datetime
 
 from .security import make_salt
 
+
 def store_file(_file, credentials):
     """
     Stores a given file into the data directory.
@@ -18,6 +19,7 @@ def store_file(_file, credentials):
     execute_store_file(_file, file_path)
     return file_path
 
+
 def execute_store_file(_file, path):
     """
     Executes the storage for a given file in a given path.
@@ -26,6 +28,7 @@ def execute_store_file(_file, path):
         f.write(_file.file.read())
         f.close()
 
+
 def inference_credentials():
     """
     Return a generated inference credentials.
@@ -33,6 +36,7 @@ def inference_credentials():
     ID = str(uuid.uuid1())
     now = datetime.now()
     return ID, now
+
 
 def user_credentials():
     """
