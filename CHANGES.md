@@ -7,3 +7,8 @@
 - Renamed `setting.py` to `settings.py`.
 - Renamed `core` directory to `inference`.
 - Stored sensitive information on a `credentials.cfg` which is added to `.gitignore`.
+
+## Version 2.0.1
+- Better code formatting.
+- Better docstrings.
+- Added changelog as `CHANGES.md`.

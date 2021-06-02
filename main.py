@@ -14,23 +14,23 @@ from database.inferencesdb import inferences_database
 from settings import PATH, VERSION
 from settings.logger import setup_logging_pre
 
-
 logger = logging.getLogger('API')
 setup_logging_pre()
 
-
-app = FastAPI(title         =   "ML-API",
-              description   =   "API Documentation and endpoint access for running inference using DenseNet.",
-              version       =   str(VERSION),
-              docs_url      =   None,
-              redoc_url     =   None,
-              debug         =   False)
+app = FastAPI(
+    title="ML-API",
+    description=
+    "API Documentation and endpoint access for running inference using DenseNet.",
+    version=str(VERSION),
+    docs_url=None,
+    redoc_url=None,
+    debug=False)
 
 
 @app.on_event("startup")
 async def startup():
     """
-    Connects to database(s) on app startup.
+    [Connects to database(s) on app startup.]
     """
     await users_database.connect()
     logger.info('Connected to users database.')
@@ -41,7 +41,7 @@ async def startup():
 @app.on_event("shutdown")
 async def shutdown():
     """
-    Disconnects from database(s) on app shoutdown.
+    [Disconnects from database(s) on app shoutdown.]
     """
     await users_database.disconnect()
     logger.info('Disconnected from users database.')
@@ -50,20 +50,26 @@ async def shutdown():
 
 
 @app.get("/", status_code=307)
-async def root_redirect():
+async def root_redirect() -> RedirectResponse:
     """
-    Redirects to root.
+    [Redirects to root.]
+
+    Returns:
+        [RedirectResponse]: [Actual root endpoint.]
     """
-    response = RedirectResponse(url=PATH+"/root/")
+    response = RedirectResponse(url=PATH + "/root/")
     return response
 
 
 @app.get("/docs", status_code=307)
-async def docs_redirect():
+async def docs_redirect() -> RedirectResponse:
     """
-    Redirects to docs.
+    [Redirects to docs.]
+
+    Returns:
+        [RedirectResponse]: [Actual docs endpoint.]
     """
-    response = RedirectResponse(url=PATH+"/docs/")
+    response = RedirectResponse(url=PATH + "/docs/")
     return response
 
 
